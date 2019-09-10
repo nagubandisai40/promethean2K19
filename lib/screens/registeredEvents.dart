@@ -32,7 +32,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
         temp.forEach((String key, dynamic value) {
           // pageOffset==0?pageOffset=-1:pageOffset=0;
           slidingWidgets.add(SlidingCards(
-            eventType: value['eventType'],
+            eventType: value['organizedDept'],
             fee: value['fee'].toString(),
             imageUrl: value['imageUrl'],
             offset: pageOffset,
@@ -57,7 +57,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
   Future _future;
   @override
   initState() {
-    _future = getregisteredEvents(widget.uid);
+    // _future = getregisteredEvents(widget.uid);
     pageController = new PageController(viewportFraction: 0.8);
     pageController.addListener(() {
       setState(() => pageOffset = pageController.page);
@@ -74,7 +74,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<dynamic>(
-        future: _future,
+        future: getregisteredEvents(widget.uid),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
